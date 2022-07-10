@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import br.com.lucolimac.repositories.R
 import br.com.lucolimac.repositories.core.createDialog
 import br.com.lucolimac.repositories.core.createProgressDialog
+import br.com.lucolimac.repositories.core.hideSoftKeyboard
 import br.com.lucolimac.repositories.databinding.ActivityMainBinding
 import br.com.lucolimac.repositories.presentation.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,6 +51,10 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         Log.e(TAG, "onQueryTextSubmit: $query")
+        query?.let{
+            viewModel.getRepoList(it)
+        }
+        binding.root.hideSoftKeyboard()
         return true
     }
 
